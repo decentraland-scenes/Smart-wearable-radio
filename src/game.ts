@@ -1,22 +1,22 @@
 import * as ui from '@dcl/ui-scene-utils'
 
-let radios = {
+const radios = {
   Rave: {
-    value: 'https://icecast.ravepartyradio.org/ravepartyradio-192.mp3',
+    value: 'https://icecast.ravepartyradio.org/ravepartyradio-192.mp3'
   },
   Delta: {
-    value: 'https://cdn.instream.audio/:9069/stream?_=171cd6c2b6e',
+    value: 'https://cdn.instream.audio/:9069/stream?_=171cd6c2b6e'
   },
   Signs: {
-    value: 'https://edge.singsingmusic.net/MC2.mp3',
+    value: 'https://edge.singsingmusic.net/MC2.mp3'
   },
   MK_Lab: {
     value:
-      'https://freeuk13.listen2myradio.com/live.mp3?typeportmount=s2_20223_stream_944192845',
-  },
+      'https://freeuk13.listen2myradio.com/live.mp3?typeportmount=s2_20223_stream_944192845'
+  }
 }
 
-let radioUI = new ui.CustomPrompt(ui.PromptStyles.DARKLARGE, null, null)
+const radioUI = new ui.CustomPrompt(ui.PromptStyles.DARKLARGE, null, null)
 
 radioUI.addText('DCL Radio', 0, 170, Color4.White(), 25)
 
@@ -35,7 +35,7 @@ radioUI.addSwitch(
   ui.SwitchStyles.SQUAREGREEN
 )
 
-let station1 = radioUI.addCheckbox(
+const station1 = radioUI.addCheckbox(
   'Rave',
   -130,
   100,
@@ -50,7 +50,7 @@ let station1 = radioUI.addCheckbox(
   }
 )
 
-let station2 = radioUI.addCheckbox(
+const station2 = radioUI.addCheckbox(
   'Delta',
   -130,
   70,
@@ -66,7 +66,7 @@ let station2 = radioUI.addCheckbox(
   }
 )
 
-let station3 = radioUI.addCheckbox(
+const station3 = radioUI.addCheckbox(
   'Signs',
   -130,
   40,
@@ -82,7 +82,7 @@ let station3 = radioUI.addCheckbox(
   }
 )
 
-let station4 = radioUI.addCheckbox(
+const station4 = radioUI.addCheckbox(
   'MK_Labs',
   -130,
   10,
@@ -97,14 +97,14 @@ let station4 = radioUI.addCheckbox(
   }
 )
 
-let volUp = radioUI.addButton('Volume +', -100, -50, () => {
+const volUp = radioUI.addButton('Volume +', -100, -50, () => {
   volume += 0.1
 
   if (radioPlayer.hasComponent(AudioStream))
     radioPlayer.getComponent(AudioStream).volume = volume
 })
 
-let volDown = radioUI.addButton('Volume -', 100, -50, () => {
+const volDown = radioUI.addButton('Volume -', 100, -50, () => {
   volume -= 0.1
 
   if (radioPlayer.hasComponent(AudioStream))
@@ -124,7 +124,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.SECONDARY, false, (e) => {
 let volume: number = 0.5
 let station = ''
 
-let radioPlayer = new Entity()
+const radioPlayer = new Entity()
 engine.addEntity(radioPlayer)
 
 export function playRadio(state: boolean, url?: string) {
@@ -133,7 +133,7 @@ export function playRadio(state: boolean, url?: string) {
       radioPlayer.getComponent(AudioStream).playing = false
   } else if (url) {
     station = url
-    let musicStream = new AudioStream(url)
+    const musicStream = new AudioStream(url)
     radioPlayer.addComponentOrReplace(musicStream)
     musicStream.playing = true
     musicStream.volume = volume
